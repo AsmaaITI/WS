@@ -1,0 +1,22 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Login Form</title>
+</head>
+<body>
+<form  name="form-login" method='post' action="/login/">
+{% csrf_token %}
+<b>already exist</b>
+<input type="submit" name="login" value="LOG IN"/>
+</form>
+<br>
+<a href="{% url 'social:begin' 'facebook' %}?next=/registerfacebook/">Register with Facebook</a>
+
+</br>
+<br>
+<input type="home" name="home" value="home"/>
+
+</br>
+<a href="/register/">Sign UP</a>
+</body>
+</html>

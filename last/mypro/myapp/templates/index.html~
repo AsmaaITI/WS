@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Articles {% endblock %}
+{% block content %}
+
+{% if loginMessage  %}
+{{loginMessage}}
+{%endif%}
+
+<form  name="form-login" method='post' action="/login/">
+{% csrf_token %}
+
+{% if forgetme  %}
+<input required placeholder="Username" type="text" name="username" value ={{username}} readonle/><br>
+<input required placeholder="Password" type="password" name="password"/><br>
+<a href="/forgetpass/">Forget password?</a><br>
+
+<label for="remember">Forget Me:</label>
+<input type="checkbox" name="remember" value="yes"><br>
+{%else%}
+<input required placeholder="Username" type="text" name="username" /><br>
+<input required placeholder="Password" type="password" name="password"/><br>
+<a href="/forgetpass/">Forget password?</a><br>
+
+<label for="remember">Remember Me:</label>
+<input type="checkbox" name="remember" value="yes"><br>
+{%endif%}
+
+
+<input type="submit" name="login" value="LOG IN"/>
+</form>
+<br>
+ <a href="{% url 'social:begin' 'facebook' %}?next=/facebooklogin/">Login with Facebook</a>
+<a href="{% url 'social:begin' 'facebook' %}?next=/facebookregister/">Register with Facebook</a>
+<br>
+<a href="/register/">Sign UP</a>
+{% endblock %}

@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Forget password {% endblock %}
+{% block content %}
+
+{% if loginMessage  %}
+{{loginMessage}}
+{%endif%}
+<form id="myform" name="form-login" method='post' action="/sendmail/">
+{% csrf_token %}
+<label >Please enter your email to renew your password::</label><br>
+<input required placeholder="email" type="text" name="email"/><br>
+<input type="submit" name="login" value="Send"/>
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Facebook Registration{% endblock %}
+{% block content %}
+
+
+<form  id="myform" name="register-login" method='post' action="/saveUserfacebook/" enctype='multipart/form-data' >
+{% csrf_token %}
+
+<div class="text"> <b>User</b> <b>name</b></div><input required placeholder="Username" type="text" name="username" value={{nameg}} readonly /><br>
+<div class="text"> <b>E-mail</b></div><input required placeholder="Email" type="email" name="email" value={{emailg}} readonly/><br>
+<div class="text"> <b>Facebook</b> <b>id</b></div><input required placeholder="facebookid" type="facebookid" name="facebookid" value={{FbId}} readonly/><br>
+<div class="text"> <b>Password</b></div><input required placeholder="Password" type="password" name="password"/><br>
+<div class="text"> <b>Confirm</b> <b>password</div><input required placeholder="Re-Password" type="password" name="repassword"/><br>
+<input placeholder="your pic" type="file" name="image" /><br>
+<input placeholder="profile_pic" type="url" name="myimage" value={{profilepicture}} /><br>
+<input type="submit" name="login" value="Register"/>
+</form>
+<br>
+<script>
+
+var selected=document.getElementsByTagName("a")[5];
+selected.style.color = "#B2248F";
+</script>
+
+{% endblock %}

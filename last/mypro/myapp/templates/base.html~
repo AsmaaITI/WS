@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="{% static "styles/home.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "styles/style.css" %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    
+
+{% if logged == 0 %}
+
+<div class="menu">
+    <ul >
+          
+        <li class="menu"><a href="/home/"  style="color:blue">Home</a></li>
+        <li class="menu"><a href="/articles/">Articles</a></li>
+        <li class="menu"><a href="/login/">Sign in</a></li>
+        <li class="menu"><a href="/register/">Sign up</a></li>
+        <li class="menu"><a href="{% url 'social:begin' 'facebook' %}?next=/facebooklogin/">Login with Facebook</a></li>
+        <li class="menu"><a href="{% url 'social:begin' 'facebook' %}?next=/facebookregister/">Facebook register</a></li>  
+    </ul>
+</div>
+
+{% else %}
+<ul>
+    <div class="menu">
+         
+        <li class="menu"><a href="/home/" style="color:blue">Home</a></li>
+        <li class="menu"><a href="/articles/">Articles</a></li>
+        <li class="menu"><a href="/logout/">Sign out</a></li>
+        <li class="menu">welcome {{username}} </a></li>
+    </div>  
+</ul>
+{% endif%}
+
+  <div width='800px' height='800px'> {% block content %} code {% endblock %}</div>          
+        
+       
+
+</body>
+</html>

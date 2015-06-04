@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Register Form</title>
+</head>
+<body>
+<form   name="register-login" method='post' action="/saveUserfacebook/" enctype='multipart/form-data' >
+{% csrf_token %}
+
+<input required placeholder="Username" type="text" name="username" value={{nameg}} readonly /><br>
+<input required placeholder="Email" type="email" name="email" value={{emailg}} readonly/><br>
+<input required placeholder="facebookid" type="facebookid" name="facebookid" value={{FbId}} readonly/><br>
+<input required placeholder="Password" type="password" name="password"/><br>
+<input required placeholder="Re-Password" type="password" name="repassword"/><br>
+<input placeholder="your pic" type="file" name="image" />
+<input placeholder="profile_pic" type="url" name="myimage" value={{profilepicture}} />
+<input type="submit" name="login" value="Register"/>
+</form>
+<br>
+</body>
+</html>

@@ -1,0 +1,118 @@
+body{
+    /*width: 914px;
+    height: 620px;
+    border: solid cadetblue;
+    background-color:teal;
+    border-radius: 17px;
+	position: absolute;
+    margin: auto; 
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;*/
+    background-color:pink;
+}
+
+.comment{
+
+background-color:teal;
+    clear :both;
+    margin: auto; 
+    border:  2px  dotted red;
+    width: 700px;
+   background-color:rgba(255,255,255,0.2);
+
+   padding : 30px;
+    margin: 20px auto;
+
+}
+
+
+
+
+
+#addComment{
+
+/*background-color:teal;*/
+    clear :both;
+    margin: auto; 
+    border: solid1px;
+    width: 700px;
+   background-color:rgba(233,15,77,0.1);
+   padding : 30px;
+    margin: 20px auto;
+
+}
+
+
+
+#article{
+
+/*background-color:teal;*/
+    clear :both;
+    margin: auto; 
+    border: solid 1px;
+    width: 700px;
+   background-color:rgba(100,100,100,0.2);
+   padding : 30px;
+    margin: 20px auto;
+
+}
+
+
+
+
+
+
+
+article{
+/*    background-color:teal;*/
+    border: solid 1px;
+    width: 800px;
+   background-color:rgba(255,0,0,0.1);
+  /*display : block;
+  clear :both;*/
+    /*border-radius: 17px;*/
+
+  /*  position: absolute;*/
+    margin: auto; 
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+section{
+    background-color:teal;
+    width: 800px;
+    /*height: 620px;*/
+    border: solid 1px;
+    background-color:rgba(255,0,0,0.1);
+    /*border-radius: 17px;*/
+  display : block;
+clear :both;
+
+    position: absolute;
+    margin: auto; 
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+</div>
+
+h1{
+    color:white;
+    font-size: 30px;
+    padding-left: 124px;
+    padding-top: 68px;
+}
+
+img {
+	margin: 0 auto;
+ 	height:300px;
+   	width: 300px;
+	/*display: inline-block;*/
+	/*float: left;*/
+}

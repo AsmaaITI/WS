@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="{% static "styles/home.css" %}">
+    
+    <title>{% block title %}{% endblock %}</title>
+    <style>{% block img %}{% endblock %}</style>
+</head>
+<body>
+    
+
+{% if logged == 0 %}
+<div class="menu">
+<img  class="logo" src="/static/st.jpg" >
+    <ul >
+          
+        <li class="menu"><a href="/home/">Home</a></li>
+        <li class="menu"><a href="/articles/">Articles</a></li>
+        <li class="menu"><a href="/login/">Sign in</a></li>
+        <li class="menu"><a href="/register/">Sign up</a></li>
+        <li class="menu"><a href="{% url 'social:begin' 'facebook' %}?next=/facebooklogin/">Login with Facebook</a></li>
+        <li class="menu"><a href="{% url 'social:begin' 'facebook' %}?next=/facebookregister/">Facebook register</a></li>  
+    </ul>
+</div>
+
+{% else %}
+ <div class="menu">
+ <img  class="logo" src="/static/st.jpg" >
+<ul>
+   
+         
+        <li class="menu"><a href="/home/">Home</a></li>
+        <li class="menu"><a href="/articles/">Articles</a></li>
+        <li class="menu"><a href="/profile/">Profile</a></li>
+        <li class="menu"><a href="/logout/">Sign out</a></li>
+        <li class="menu"> <font color="#006600">welcome {{username}}</font> </a></li>
+   
+</ul>
+  </div> 
+{% endif%}
+
+  <div width='800px' height='800px'> {% block content %} code {% endblock %}</div>          
+        
+       
+
+</body>
+</html>

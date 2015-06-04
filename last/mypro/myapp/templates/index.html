@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Login {% endblock %}
+{% block content %}
+
+
+
+<form  id="myform" name="form-login" method='post' action="/login/">
+{% if loginMessage  %}
+{{loginMessage}}
+
+{%endif%}
+{% csrf_token %}
+
+{% if newindex  %}
+
+<div class="text"> <b>User</b> <b>name</b></div><input required placeholder="Username" type="text" name="username" value ={{username}} readonly/><br>
+<div class="text"> <b>Password</b></div><input required placeholder="Password" type="password" name="password"/><br>
+<a href="/forgetpass/">Forget password?</a><br>
+<label for="remember">Forget Me:</label>
+<input type="checkbox" name="forgetme" value="yes"><br>
+<input type="text" name="mynewindex" style="visibility:hidden;"  value= {{newindex}} ><br>
+
+{%else%}
+
+
+<div class="text"> <b>User</b> <b>name</b></div><input required placeholder="Username" type="text" name="username" /><br>
+<div class="text"> <b>Password</b></div><input required placeholder="Password" type="password" name="password"/><br>
+<a href="/forgetpass/">Forget password?</a><br>
+<label for="remember">Remember Me:</label>
+<input type="checkbox" name="remember" value="yes"><br>
+<input type="text" name="mynewindex" style="visibility:hidden;" value= {{newindex}}  ><br>
+{%endif%}
+
+
+<input type="submit" name="login" value="LOG IN"/>
+<br>
+ <a href="{% url 'social:begin' 'facebook' %}?next=/facebooklogin/">Login with Facebook</a><br><br>
+<a href="{% url 'social:begin' 'facebook' %}?next=/facebookregister/">Register with Facebook</a>
+<br><br>
+<a href="/register/">Sign UP</a>
+</form>
+<script>
+
+var selected=document.getElementsByTagName("a")[2];
+selected.style.color = "#B2248F";
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Register {% endblock %}
+{% block content %}
+<form  id="myform" name="register-login" method='post' action="/saveUser/" enctype='multipart/form-data' >
+{% csrf_token %}
+<div class="text"> <b>User</b> <b>name</b></div><input required placeholder="Username" type="text" name="username"/><br>
+<div class="text"> <b>E-mail</b></div><input required placeholder="Email" type="email" name="email"/><br>
+<div class="text"> <b>Password</b></div><input required placeholder="Password" type="password" name="password"/><br>
+<div class="text"> <b>Confirm</b> <b>password</div><input required placeholder="Re-Password" type="password" name="repassword"/><br>
+<input placeholder="your pic" type="file" name="image"/>
+<input type="button" onclick="submitform()" name="login" value="SIGN UP" />
+</form>
+<p id="FormError"></p>
+<br>
+
+<script>
+var selected=document.getElementsByTagName("a")[3];
+selected.style.color = "#B2248F";
+
+{% if registerMessage  %}
+document.getElementById("FormError").innerHTML = "{{registerMessage}}"; 
+{%endif%}
+
+{% if username  %}
+document.getElementsByName("username")[0].value = "{{username}}"; 
+{%endif%}
+
+{% if email  %}
+document.getElementsByName("email")[0].value = "{{email}}"; 
+{%endif%}
+
+
+
+</script>
+
+
+<script type="text/javascript">
+function submitform()
+{
+var passwordvar = document.getElementsByName("password")[0].value;
+var repasswordvar = document.getElementsByName("repassword")[0].value;
+if(passwordvar==repasswordvar){
+document.getElementById("myform").submit();
+}else{
+document.getElementsByName("password")[0].value="";
+document.getElementsByName("repassword")[0].value="";
+document.getElementById("FormError").innerHTML = "passwords are not the same ";
+}
+}
+</script>
+
+{% endblock %}

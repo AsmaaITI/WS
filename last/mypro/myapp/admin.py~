@@ -1,0 +1,22 @@
+from django.contrib import admin
+from myapp.models import Article,UserInfo
+# Register your models here.
+
+
+class ArticleAdmin(admin.ModelAdmin):
+    readonly_fields = ('date',)
+    list_display = ( 'head', 'body', 'image', 'published')
+    list_filter = ['date','published']
+    search_fields = ['date',]
+
+admin.site.register(Article, ArticleAdmin)
+
+
+class UserInfoAdmin(admin.ModelAdmin):
+    readonly_fields = ('facebookId','hasfacebook')
+    list_display = ( 'name', 'email', 'password')
+    list_filter = ['hasfacebook',]
+
+admin.site.register(UserInfo, UserInfoAdmin)
+
+

@@ -1,0 +1,189 @@
+
+div.menu {
+
+          background-color: #C0C0C0; 
+          padding: 0px 10px 10px 10px; 
+          height:50px;
+ 
+      }
+      ul{
+        margin: 10px 0px 0px 70px; 
+      }
+      li.menu {
+        padding: 10px 10px 10px 20px;
+        font-size: 20px;
+        float: left;
+        background-color: #C0C0C0;        
+      }
+      .menu a{
+        text-decoration:none;
+        color: #ffffff;
+      }
+      li.menu a:hover{
+        color : blue;
+         text-decoration: none;
+            
+      }
+  
+      ul{
+        list-style-type:none;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body{
+	background-image: url("writing.jpg");
+}
+
+#artImage{
+	width :300px;
+	height:300px;
+	margin: auto;
+	float:left;
+}
+
+
+.userImg{
+	width : 60px;
+	height: 60px;
+	margin-top:0px;
+	margin-right: 10px;
+	float:left;
+
+}
+
+
+.comment{
+    clear :both;
+    border:  1px  solid red;
+    width: 700px;
+    background-color:rgba(255,200,255,0.5);
+   padding : 30px;
+    margin: 20px auto;
+   overflow: hidden;
+
+}
+
+.date{
+	font-size: 15px;
+    margin-left: 50px;
+    padding-top: 0px;
+  font-family: Calibri;
+}
+
+.rdate{
+	font-size: 15px;
+    margin-left: 15px;
+    padding: 2px 0px;
+  font-family: Calibri;
+display:block;
+}
+
+
+
+.reply p{
+	font-size: 15px;
+	font-family: Calibri;
+	padding: 5px;
+}
+
+.comment h3{  /*user name*/
+
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 0px;
+    font-family : candara;	
+}
+
+.reply h2{		/*user name*/
+    font-size: 15px;
+    margin-left: 50px;
+    margin-top: 0px;
+	padding:5px;
+     font-family: "Candara", Georgia, Serif;
+
+}
+
+
+
+
+.reply{
+	clear :both;
+	float:right;
+	margin: auto; 
+	  border:  1px  dotted red;
+	padding : 10px;
+	margin: 10px auto;
+	font-size: 15px;
+	font-family: Calibri;
+	overflow:hidden;
+
+
+}
+
+
+.addComment{
+
+    clear :both;
+    margin: auto; 
+    margin-left:260px;
+}
+
+
+
+#article{
+
+    clear :both;
+    border: solid 1px;
+    width: 700px;
+   background-color:rgba(100,100,100,0.05);
+   padding : 30px;
+   margin: 20px auto;
+overflow: hidden;
+
+}
+
+
+
+h1{
+    font-size: 30px;
+}
+
+#artBody{
+
+clear:both;
+padding-top:30px;
+
+}
+
+#comCont{
+  margin-left: 20px;
+color:blue;
+}
+
+
+#articleData{
+margin-left:350px;
+
+}

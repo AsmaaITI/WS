@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Articles {% endblock %}
+{% block img %}
+	body{
+	background: url("/static/styles/SWEasterCrittersBlogBG.jpg") no-repeat center center fixed;
+	background-size: 100% 100%;} {% endblock %}
+
+   {% block content %}
+
+<script>
+
+var index=0;
+var headline=[];
+var content=[];
+var article_id=[];
+
+{% for article_data in myarticle %}
+
+       headline[index]="{{article_data.head}}";
+       content[index]="{{article_data.body|escapejs}}";
+       article_id[index]="{{article_data.id}}";
+       index++;
+
+{%endfor%}
+var selected=document.getElementsByTagName("a")[1];
+selected.style.color = "	#B2248F";
+
+	 for (var i = 0; i < index; i++) 
+	 {
+
+			content[i]=content[i].replace( /:\)/g, "<img src= '/static/styles/emotions/smile.gif'>");
+			content[i]=content[i].replace( /:D/g, "<img src= '/static/styles/emotions/bigsmile.gif'>");
+			content[i]=content[i].replace( /:\(/g, "<img src= '/static/styles/emotions/sadsmile.gif'>");
+			content[i]=content[i].replace( /:'\(/g, "<img src= '/static/styles/emotions/crying.gif'>");
+			content[i]=content[i].replace( /:p/g, "<img src= '/static/styles/emotions/tongueout.gif'>");
+			content[i]=content[i].replace( /;\)/g, "<img src= '/static/styles/emotions/wink.gif'>");
+			content[i]=content[i].replace( /<3/g, "<img src= '/static/styles/emotions/heart.gif'>");
+			content[i]=content[i].replace( /:\*/g, "<img src= '/static/styles/emotions/kiss.gif'>");
+			content[i]=content[i].replace( /3\)/g, "<img src= '/static/styles/emotions/devil.gif'>");
+			content[i]=content[i].replace( /8-\)/g, "<img src= '/static/styles/emotions/cool.gif'>");
+			content[i]=content[i].replace( /:o/g, "<img src= '/static/styles/emotions/surprised.gif'>");
+			
+
+		}
+
+	
+                var col=2;
+                var x={{mycount}};
+                var row=0;
+
+                var k=0;
+                var allDivs=document.createElement("div");
+                allDivs.setAttribute("class", "mybase");
+                var newElm=document.createElement("table");
+                newElm.setAttribute("class", "myTable");
+
+
+
+                if (x%2==0)
+                {
+                	row=x/2;
+                	for(i=0;i<row;i++)
+                	{
+                	
+                   		var newRow=document.createElement("tr");
+
+	                    for(j=0;j<col;j++)
+	                    {
+                            create_table();
+	                    }
+	                     newElm.appendChild(newRow);  
+
+                    } 
+                    	
+                } 
+
+                else 
+                {
+                	row=(x/2)+.5;
+
+                	for(i=0;i<row;i++)
+                	{
+                	
+	                    var newRow=document.createElement("tr");
+
+		                   	for(j=0;j<col;j++)
+		                    {
+		                    	if(j!=1 || i!=row-1)
+		                    	{
+		                    		   create_table();
+			                    }
+
+		                    }
+		                    newElm.appendChild(newRow);    
+		           }
+                     	
+                } 
+                allDivs.appendChild(newElm); 
+                document.body.appendChild(allDivs);
+
+ 				for (var i = 5 ,j=0; i < index*5; i+=4,j++) 
+ 				{
+                	
+         	        document.getElementsByTagName("div")[i].innerHTML = content[j];
+		        }
+
+ 
+	            function create_table()
+                {
+		            var newCol=document.createElement("td");
+
+		            var link=document.createElement("a");
+		            link.setAttribute("href", "/article/"+article_id[k]+"/");
+		            var more=document.createTextNode("More");
+		            link.appendChild(more);
+
+		            var linkDiv=document.createElement("div");
+		            linkDiv.setAttribute("class", "linkDiv");
+
+		            var container=document.createElement("div");
+		            container.setAttribute("class", "mainDiv");
+
+		            var headDiv=document.createElement("div");
+		            headDiv.setAttribute("class", "headDiv");
+
+
+		            var headLink=document.createElement("a");
+		            headLink.setAttribute("href", "/article/"+article_id[k]+"/");
+		            var head=document.createTextNode(headline[k]);
+		            headLink.appendChild(head);
+
+
+		            var contentDiv=document.createElement("div");
+		            contentDiv.setAttribute("id", "contentDiv");
+
+		            
+		            var articleBody=document.createTextNode(content[k]);
+		                
+		            k++;
+
+		            headDiv.appendChild(headLink);
+		            contentDiv.appendChild(articleBody);
+	                linkDiv.appendChild(link);
+		            container.appendChild(headDiv);
+		            container.appendChild(contentDiv);
+		            container.appendChild(linkDiv);
+		            newCol.appendChild(container); 
+		            newRow.appendChild(newCol);
+		        }
+
+		        
+              
+          </script>
+
+{% endblock %}

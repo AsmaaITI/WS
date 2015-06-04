@@ -1,0 +1,10 @@
+sudo apt-get install libxml2-dev
+sudo apt-get install libxslt1-dev 
+
+Also, install the python dev package:
+
+sudo apt-get install python2.6-dev
+
+
+// to download client django to call webservices
+sudo easy_install https://fedorahosted.org/releases/s/u/suds/python-suds-0.4.tar.gz

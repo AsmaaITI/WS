@@ -1,0 +1,226 @@
+      div{    
+        font-family: Helvetica;
+        margin: 1% 1% 1% 1%;
+        overflow: hidden;
+
+      }
+      body
+        {         
+         background: url("MothersFloral2c-1.jpg") no-repeat center center fixed;
+         background-size: 100% 100%;
+        }
+
+     .logo
+     {
+      margin-top: 5px;
+      float: left;
+      width: 150px;
+      height: 50px;
+     }
+
+      div.menu {
+
+          background-color: #92A0AD; 
+          padding: 0px 10px 10px 10px; 
+          height:50px;
+          /*float: left;*/
+ 
+      }
+      ul{
+        margin: 10px 0px 0px 70px; 
+      }
+      li.menu {
+        padding: 10px 10px 10px 20px;
+        font-size: 20px;
+        float: left;
+        background-color: #92A0AD;
+
+               
+      }
+      .menu a{
+        text-decoration:none;
+        color: #ffffff;
+      }
+      li.menu a:hover{
+        color : blue;
+         text-decoration: none;
+            
+      }
+  
+      ul{
+        list-style-type:none;
+      }
+      
+      #image{
+         height:250px;
+        width:630px;
+      }
+
+      #galery{
+        height:250px;
+        width:630px;
+        border-width: 0px;
+        margin : 0 auto;
+        float: left;
+    }
+     #head{
+
+        width:500px;
+        margin: 0px 0px 0px 500px;
+        font-size: 30px;
+
+    }
+
+     a:hover{
+        color : #990000;
+        font-weight: bold;
+
+      }
+    #article{
+        height:600px;
+        width:650px;
+        margin: 0px 0px 0px 310px;
+    }
+    .upper{
+          width: 47%;
+          height:250px;
+          float: left;
+          border-style: double;
+          border-width: 2px;
+          border-radius: 4px ;
+          border-color: #92A0AD;
+           background-color: #FFA3C2;
+        }
+    .lower{
+          width: 30.5%;
+          height:250px;
+          float: left;
+          border-style: double;
+          border-width: 2px;
+          border-radius: 4px ;
+          border-color: #92A0AD;
+           background-color: #FFA3C2;
+      }
+      .head_text{
+          width: 50px;
+          height:300px;
+
+
+      }
+      .article_head{
+          padding: 5px 5px 5px 5px;
+          font-size: 20px;
+
+        }
+      #article_body{
+          width: 93%;
+          max-height: 150px;
+          min-height: 140px;
+          padding: 5px 5px 5px 5px;
+          text-align: center;
+      }
+      #more_div{
+          width: 93%;
+          max-height: 150px;
+          min-height: 140px;
+          padding: 5px 5px 5px 5px;
+          text-align: right;
+      }
+
+      .arrow{
+          width: 40px;
+          height: 150px;
+          float: left;
+          
+      }
+      #arrow_left{
+          margin: 40px 5px 0px 270px
+      }
+      #arrow_right{
+          margin: 40px 0px 0px 5px
+      }
+      
+ .mainDiv
+      {
+         width : 280px;
+        height:200px;
+         border-style: double;
+          border-width: 2px;
+          margin: 20px 5px 5px 50px;
+          border-radius: 4px ;
+           border-color: #92A0AD;
+           background-color: #FFA3C2;
+
+      }
+
+      #contentDiv
+      {
+         width : 200px;
+         max-height: 100px;
+         padding: 5px 5px 5px 5px;
+         text-align: center;
+         min-height: 95px;
+
+
+      
+      }
+
+      .headDiv
+      {
+        width : 150px;
+         max-height: 30px;
+         padding: 10px 5px 5px 10px;
+         font-size: 20px;
+      }
+
+      .linkDiv
+      {
+         width : 200px;
+         max-height: 30px;
+         text-align: right;
+         padding: 5px 5px 5px 5px;
+
+
+      }
+
+    table 
+    {
+   /* width:100%;*/
+    margin: 0 auto;
+    }
+    
+    #myform 
+    {
+
+            margin:100px 50px 50px 400px;
+        
+    }  
+    input{
+      margin:5px 5px 5px 5px;
+      height: 25px;
+
+
+    }
+  
+      
+
+   
+      
+    .text{
+                float:left;
+                font-size: 20px;
+                width:220px;
+                height: 25px;
+                color:  #4C001A;
+                font-family:Arial Black;
+              }
+
+              .mybase
+              {
+                 width : 800px;
+       
+               margin-left: 220px;
+
+
+
+              }

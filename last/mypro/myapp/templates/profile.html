@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} My Profile {% endblock %}
+{% block content %}
+<form  id="myform" name="profile-form" method='post' action="/updateprofile/" enctype='multipart/form-data' >
+{% csrf_token %}
+<div class="text"> <b>User</b> <b>name</b></div><input  required placeholder="Username" type="text" name="username"/><br>
+<div class="text"> <b>E-mail</b></div><input  required placeholder="Email" type="email" name="email"/><br>
+<img    name ="userimage" src="{% static "myapp/static/users/2.jpg" %}"  style="width : 170px; height : 170px;"/> 
+<br>
+
+<div class="text"> <b>update</b> <b>image</b></div>
+<input  placeholder="your pic" type="file" name="image"/>
+<br>
+<input  hidden  type="text" name="oldusername"/><br>
+<input type="submit" name="update" value="Update"/>
+<br>
+<p id="FormError"></p>
+</form>
+
+<script>
+
+
+var selected=document.getElementsByTagName("a")[2];
+selected.style.color = "#B2248F";
+
+{% if registerMessage  %}
+document.getElementById("FormError").innerHTML = "{{registerMessage}}"; 
+{%endif%}
+
+{% if userimage %}
+document.getElementsByName("userimage")[0].src = "/{{userimage}}"; 
+{%endif%}
+
+{% if username  %}
+document.getElementsByName("username")[0].value = "{{username}}"; 
+document.getElementsByName("oldusername")[0].value = "{{username}}"; 
+{%endif%}
+
+{% if email  %}
+document.getElementsByName("email")[0].value = "{{email}}"; 
+{%endif%}
+
+</script>
+
+{% endblock %}

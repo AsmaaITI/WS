@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Articles {% endblock %}
+
+{% block content %}
+{%load staticfiles%}
+
+ 
+<script>
+
+var index=0;
+var headline=[];
+var content=[];
+var article_id=[];
+
+{% for article_data in myarticle %}
+
+       headline[index]="{{article_data.head}}";
+       content[index]="{{article_data.body}}";
+       article_id[index]="{{article_data.id}}";
+       index++;
+
+{%endfor%}
+
+ 
+                var col=2;
+                var x={{mycount}};
+                var row=0;
+
+                var k=0;
+                var newElm=document.createElement("table");
+                newElm.setAttribute("class", "myTable");
+
+                if (x%2==0)
+                {
+                	row=x/2;
+                	for(i=0;i<row;i++)
+                	{
+                	
+                   		var newRow=document.createElement("tr");
+
+	                    for(j=0;j<col;j++)
+	                    {
+                            create_table();
+	                    }
+	                     newElm.appendChild(newRow);  
+
+                    } 
+                    	
+                } 
+
+                else 
+                {
+                	row=(x/2)+.5;
+
+                	for(i=0;i<row;i++)
+                	{
+                	
+	                    var newRow=document.createElement("tr");
+
+		                   	for(j=0;j<col;j++)
+		                    {
+		                    	if(j!=1 || i!=row-1)
+		                    	{
+		                    		   create_table();
+			                    }
+
+		                    }
+		                    newElm.appendChild(newRow);    
+		            }
+                     	
+                } 
+
+                document.body.appendChild(newElm);
+ 
+	            function create_table()
+                {
+		            var newCol=document.createElement("td");
+
+		            var link=document.createElement("a");
+		            link.setAttribute("href", "/article/article_id[k]/");
+		            var more=document.createTextNode("More");
+		            link.appendChild(more);
+
+		            var linkDiv=document.createElement("div");
+		            linkDiv.setAttribute("class", "linkDiv");
+
+		            var container=document.createElement("div");
+		            container.setAttribute("class", "mainDiv");
+
+		            var headDiv=document.createElement("div");
+		            headDiv.setAttribute("class", "headDiv");
+
+
+		            var headLink=document.createElement("a");
+		            headLink.setAttribute("href", "/article/article_id[k]/");
+		            var head=document.createTextNode(headline[k]);
+		            headLink.appendChild(head);
+
+
+		            var contentDiv=document.createElement("div");
+		            contentDiv.setAttribute("class", "contentDiv");
+
+		            
+		            var articleBody=document.createTextNode(content[k]);
+		                
+		            k++;
+
+		            headDiv.appendChild(headLink);
+		            contentDiv.appendChild(articleBody);
+	                linkDiv.appendChild(link);
+		            container.appendChild(headDiv);
+		            container.appendChild(contentDiv);
+		            container.appendChild(linkDiv);
+		            newCol.appendChild(container); 
+		            newRow.appendChild(newCol);
+		        }
+              
+          </script>
+
+

@@ -1,0 +1,3 @@
+from suds.client import Client 
+hello_client = Client('http://localhost:8000/api/?wsdl') 
+hello_client.service.say_hello("hello") 

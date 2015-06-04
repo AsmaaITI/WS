@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Cookie {% endblock %}
+{% block content %}
+
+
+<form  name="form-login" method='post' action="/login/">
+{% if loginMessage  %}
+{{loginMessage}}
+{%endif%}
+{% csrf_token %}
+<input required placeholder="Username" type="text" name="username" value="username"/><br>
+<input required placeholder="Password" type="password" name="password"/><br>
+<a href="/forgetpass/">Forget password?</a><br>
+
+
+<label for="remember">Forget Me:</label>
+<input type="checkbox" name="forget" value="yes"><br>
+
+
+<input type="submit" name="login" value="LOG IN"/>
+</form>
+<br>
+ <a href="{% url 'social:begin' 'facebook' %}?next=/facebooklogin/">Login with Facebook</a>
+<a href="{% url 'social:begin' 'facebook' %}?next=/facebookregister/">Facebook register</a>
+<br>
+<a href="/register/">Sign UP</a>
+{% endblock %}

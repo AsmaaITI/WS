@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Home {% endblock %}
+{% block img %}
+	body{
+	background: url("/static/styles/SWEasterCrittersBlogBG.jpg") no-repeat center center fixed;
+	background-size: 100% 100%;} {% endblock %}
+{% block content %}
+
+
+
+<input type="image" src="/static/Left Arrows.png" class="arrow" id="arrow_left">
+<div id="galery">
+
+</div>
+<input type="image" src="/static/Right Arrows.png" class="arrow" id="arrow_right">
+<div id="head">
+</div>
+
+
+{% if article %}
+<div id="article">
+	<div class="upper" id="article1">
+	</div>
+	<div class="upper" id="article2">
+	</div>
+	<div class="lower" id="article3">
+	</div>
+	<br>
+	<div class="lower" id="article4">
+	</div>
+	<div class="lower" id="article5">
+	</div>
+</div>	 
+
+
+{% else%}
+
+	<b> no articles<b>
+{% endif%}
+
+
+		<script type="text/javascript">
+
+var selected=document.getElementsByTagName("a")[0];
+selected.style.color = "#B2248F";
+
+
+			var i =0;
+			var image = document.createElement("img"); 
+			image.setAttribute("id", "image");
+			var images = [];
+			var heads = [];
+			var body = [];
+			var article_id = []; 
+
+
+
+			{% for articles in article %}
+				var img_url = "{{articles.image}}";
+				img_url = img_url.split('/');
+				images[i] = img_url[2];
+				heads[i] = "{{articles.head}}";
+				body[i] = "{{articles.body|escapejs}}";
+				article_id[i]="{{articles.id}}";
+
+				i++;
+
+			{% endfor %}
+
+			 for (var j = 0; j < i; j++) {
+
+					body[j]=body[j].replace( /:\)/g, "<img src= '/static/styles/emotions/smile.gif'>");
+					body[j]=body[j].replace( /:D/g, "<img src= '/static/styles/emotions/bigsmile.gif'>");
+					body[j]=body[j].replace( /:\(/g, "<img src= '/static/styles/emotions/sadsmile.gif'>");
+					body[j]=body[j].replace( /:'\(/g, "<img src= '/static/styles/emotions/crying.gif'>");
+					body[j]=body[j].replace( /:p/g, "<img src= '/static/styles/emotions/tongueout.gif'>");
+					body[j]=body[j].replace( /;\)/g, "<img src= '/static/styles/emotions/wink.gif'>");
+					body[j]=body[j].replace( /<3/g, "<img src= '/static/styles/emotions/heart.gif'>");
+					body[j]=body[j].replace( /:\*/g, "<img src= '/static/styles/emotions/kiss.gif'>");
+					body[j]=body[j].replace( /3\)/g, "<img src= '/static/styles/emotions/devil.gif'>");
+					body[j]=body[j].replace( /8-\)/g, "<img src= '/static/styles/emotions/cool.gif'>");
+					body[j]=body[j].replace( /:o/g, "<img src= '/static/styles/emotions/surprised.gif'>");
+			
+
+		}
+
+ 
+			i = 0; 
+			image.setAttribute("src", "/static/"+images[i]);
+			document.getElementById("galery").appendChild(image);
+			var head_text = document.createElement("div");
+			head_text.setAttribute("id", "head_text");
+			var article_head_link = document.createElement("a");
+			article_head_link.setAttribute("href", "/article/"+article_id[i]+"/");
+			var head = document.createTextNode(heads[i]);
+			article_head_link.appendChild(head);
+			head_text.appendChild(article_head_link);
+			document.getElementById("head").appendChild(head_text);
+
+			var j = 0;
+			{% for articles in article %}
+				j++;
+				var article_head= document.createElement("div");
+				article_head.setAttribute("class", "article_head");
+				var article_head_link = document.createElement("a");
+				article_head_link.setAttribute("href","/article/"+article_id[j-1]+"/");
+				var article_head_text = document.createTextNode(heads[j-1]);
+				article_head_link.appendChild(article_head_text);
+				article_head.appendChild(article_head_link);
+				document.getElementById("article"+j.toString()).appendChild(article_head);
+
+				var article_body= document.createElement("div");
+				article_body.setAttribute("id", "article_body");
+				article_body.innerHTML = body[j-1];		
+				document.getElementById("article"+j.toString()).appendChild(article_body);
+				
+
+				var more_div = document.createElement("div");
+				more_div.setAttribute("id", "more_div");
+				var more_link = document.createElement("a");
+				more_link.setAttribute("href", "/article/"+article_id[j-1]+"/");
+				var more_text = document.createTextNode("more");
+				more_link.appendChild(more_text);
+				more_div.appendChild(more_link);
+				document.getElementById("article"+j.toString()).appendChild(more_div);
+
+
+
+			{% endfor %}
+
+			function nextSlide(){
+		                i++;
+		                if(i > images.length - 1){
+		                    i = 0;
+		                }
+		                image.setAttribute("src", "/static/"+images[i]);
+						document.getElementById("galery").appendChild(image);
+						document.getElementById("head_text").remove();
+						var head_text = document.createElement("div");
+						head_text.setAttribute("id", "head_text");
+						var article_head_link = document.createElement("a");
+						article_head_link.setAttribute("href", "/article/"+article_id[i]+"/");
+						var head = document.createTextNode(heads[i]);
+						article_head_link.appendChild(head);
+						head_text.appendChild(article_head_link);
+						document.getElementById("head").appendChild(head_text);
+		    }
+		    function prevSlide(){
+		                i--;
+		                if(i < 0){
+		                    i = images.length - 1;
+		                }
+		                image.setAttribute("src", "/static/"+images[i]);
+						document.getElementById("galery").appendChild(image);
+						document.getElementById("head_text").remove();
+						var head_text = document.createElement("div");
+						head_text.setAttribute("id", "head_text");
+						var article_head_link = document.createElement("a");
+						article_head_link.setAttribute("href", "/article/"+article_id[i]+"/");
+						var head = document.createTextNode(heads[i]);
+						article_head_link.appendChild(head);
+						head_text.appendChild(article_head_link);
+						document.getElementById("head").appendChild(head_text);
+		    }
+		    var next = document.getElementById("arrow_left")
+		    next.addEventListener("click", prevSlide);
+		    var prev = document.getElementById("arrow_right")
+		    prev.addEventListener("click", nextSlide);
+
+		    setInterval(nextSlide,3000);
+
+
+
+</script>
+
+
+    {% endblock %}

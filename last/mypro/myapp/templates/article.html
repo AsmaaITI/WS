@@ -1,0 +1,249 @@
+
+{% load staticfiles %}
+
+<html>
+                <head>
+						<title> {{article.head}} </title>
+						<meta charset="UTF-8">
+						<link rel="stylesheet" type="text/css" href="{% static "styles/style.css" %}">
+						<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		</head>
+
+
+
+
+
+{% if logged == 0 %}
+
+<div class="menu">
+<img  class="logo" src="/static/st.jpg" >
+    <ul >
+          
+        <li class="menu"><a href="/home/">Home</a></li>
+        <li class="menu"><a href="/articles/">Articles</a></li>
+        <li class="menu"><a href="/login/">Sign in</a></li>
+        <li class="menu"><a href="/register/">Sign up</a></li>
+        <li class="menu"><a href="{% url 'social:begin' 'facebook' %}?next=/facebooklogin/">Login with Facebook</a></li>
+        <li class="menu"><a href="{% url 'social:begin' 'facebook' %}?next=/facebookregister/">Facebook register</a></li>  
+    </ul>
+</div>
+
+{% else %}
+<div class="menu">
+<img  class="logo" src="/static/st.jpg" >
+<ul>
+
+
+    
+         
+        <li class="menu"><a href="/home/">Home</a></li>
+        <li class="menu"><a href="/articles/">Articles</a></li>
+        <li class="menu"><a href="/profile/">Profile</a></li>
+        <li class="menu"><a href="/logout/">Sign out</a></li>
+        <li class="menu"><font color="#002952">welcome {{username}} </font> </a></li>
+    
+</ul>
+</div>  
+{% endif%}
+<div id="container">
+			<div id="article">
+
+			 <img src="/{{article.image}}" id="artImage"/> 
+			<div id="articleData">
+				 <h1>{{article.head}}</h1>
+				  <p id="adate" > Published: {{article.date}}</p>
+			
+				{% if logged == 1 %}
+				{%if userArt%}
+				<a href='/unlike/{{article.id}}/0/'>Unlike</a>
+				{%else%}
+				<a href='/like/{{article.id}}/0/'>Like</a>
+
+				{%endif%}
+				{%endif%}
+
+				<label> Likes: {{artLikes}}</label>
+
+			</div>
+			<div id="artBody"> {{article.body}} </div>
+			
+			 </div>
+
+			{% if parent  %}
+			{%  for comment in parent %}
+                          
+			<div class="comment"  id="{{comment.id}}"> 
+			<img class="userImg" src="/{{comment.userId.profilepicture}}" alt="My image"/>
+			<h3>   {{comment.userId.name}}</h3>
+			<p class="date">{{comment.date}}</p>
+			<div class="comCont">{{comment.content}}</div>
+			{% if logged == 1 %}
+					 <a href="javascript:Reply({{comment.id}})">Reply</a> 
+					{%if comment.id not in liked%}
+
+					<a href='/like/{{article.id}}/{{ comment.id }}/'>Like</a>
+					{%else%}
+					<a href='/unlike/{{article.id}}/{{ comment.id }}/'>Unlike</a>
+					{%endif%}
+
+			{%endif%}
+			<label> Likes: {{comment.likes}}</label>
+
+
+
+			</div>
+			{%endfor%}
+			{%endif%}
+
+		{% if logged == 1 %}
+		<div class="addComment" > 
+				<form name= "myForm" action= "/article/{{article.id}}/" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+				<textarea name="comment" cols="40" rows="5" placeholder="Add your comment ..." ></textarea>
+				 <input type="hidden" name="parentID" value="">
+				 <input type="submit" value="Submit">
+		</div>
+		{% endif %}
+
+		</div>   <!-- container div-->
+
+
+
+		<div id="related">
+		<h4> Related articles:</h4>
+		<ul  id = "rel">
+		{%for art in listOfArticle%}
+
+				<li class="list">	<a href='/article/{{art.id}}/'>{{art.head}}</a> </li>
+		{%endfor%}
+		<ul>
+		</div>
+
+		<script>
+		appendReply();  //load replies on comments
+
+		function Reply(x)
+		{
+
+				var cmtDiv =   document.getElementById(x+"");
+				var reply  = document.getElementsByClassName("addComment")[0];
+				reply.style.marginLeft= "0px";
+				document.forms["myForm"]["parentID"].value= x;
+				cmtDiv.appendChild(reply);
+
+		}
+
+
+function emotions (t){
+		t=t.replace( /:\)/g, "<img src= '/static/styles/emotions/smile.gif'>");
+			t=t.replace( /:D/g, "<img src= '/static/styles/emotions/bigsmile.gif'>");
+			t=t.replace( /:\(/g, "<img src= '/static/styles/emotions/sadsmile.gif'>");
+			t=t.replace( /:'\(/g, "<img src= '/static/styles/emotions/crying.gif'>");
+			t=t.replace( /:p/g, "<img src= '/static/styles/emotions/tongueout.gif'>");
+			t=t.replace( /;\)/g, "<img src= '/static/styles/emotions/wink.gif'>");
+			t=t.replace( /<3/g, "<img src= '/static/styles/emotions/heart.gif'>");
+			t=t.replace( /:\*/g, "<img src= '/static/styles/emotions/kiss.gif'>");
+			t=t.replace( /3\)/g, "<img src= '/static/styles/emotions/devil.gif'>");
+			t=t.replace( /8-\)/g, "<img src= '/static/styles/emotions/cool.gif'>");
+			t=t.replace( /:o/g, "<img src= '/static/styles/emotions/surprised.gif'>");
+			t=t.replace( /donky/g, "*****");
+			return t;
+}
+
+		//enable emotions in article comments
+		var parentComments  = document.getElementsByClassName("comCont");
+		for (var i=0 ;  i< parentComments.length ; i++)
+		{
+			var t = parentComments[i].innerHTML;
+			t= emotions (t);
+			parentComments[i].innerHTML = t;
+
+		}
+		
+		//enable emotions in article
+		var art = document.getElementById("artBody"); 
+		var t = art.innerHTML; 
+		t= emotions (t); 
+		art.innerHTML = t;
+
+		
+		function appendReply()
+		{
+		var  repDiv, header , img , p , t;
+
+		{% if replies  %}
+
+		{%  for rep in replies %}
+
+		// Create a <button> element
+		repDiv = document.createElement('div');
+		repDiv.className = "reply";
+		repDiv.id = "{{rep.id}}";
+
+
+
+		img = document.createElement('img');
+		img.className= "userImg";
+		img.src="/{{rep.userId.profilepicture}}" ;
+		repDiv.appendChild(img);
+
+		header = document.createElement('h2');
+		header.innerHTML = "{{rep.userId.name}}";
+		repDiv.appendChild(header);
+
+		
+
+		
+		p = document.createElement('label');
+		p.className="rdate";
+		p.innerHTML = "{{rep.date}} ";
+		repDiv.appendChild(p);
+
+		p = document.createElement('div');
+		
+		var t = "{{rep.content|escapejs}}";
+		t= emotions(t)
+
+
+		p.innerHTML = t;
+		repDiv.appendChild(p);
+
+		{% if logged == 1 %}		
+			p = document.createElement('a');
+			p.href="javascript:Reply({{rep.id}})";
+			p.innerHTML="Reply" ;
+			repDiv.appendChild(p);
+
+			p = document.createElement('a');
+			{%if rep.id not in liked%}
+						p.href='/like/{{article.id}}/{{ rep.id}}/';
+						p.innerHTML="Like" ;
+						{%else%}
+						p.href='/unlike/{{article.id}}/{{ rep.id}}/';
+						p.innerHTML="Unlike" ;
+						{%endif%}
+			repDiv.appendChild(p);
+		{% endif %}
+		p = document.createElement('label');
+		p.innerHTML='Likes: {{rep.likes}}';
+		repDiv.appendChild(p);
+
+
+		var e=document.getElementById("{{rep.commentId}}");
+		var width = e.offsetWidth;
+		width = width-100;
+		repDiv.style.width = width+'px';
+		e.appendChild(repDiv);
+
+
+		{%endfor%}
+		{%endif%} 
+		}
+
+
+
+
+		</script>
+
+
+

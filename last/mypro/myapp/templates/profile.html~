@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{%load staticfiles%}
+
+
+{% block title %} Articles {% endblock %}
+{% block content %}
+<form   name="profile-form" method='post' action="/updateprofile/" >
+{% csrf_token %}
+name:<input  required placeholder="Username" type="text" name="username"/><br>
+email:<input  required placeholder="Email" type="email" name="email"/><br>
+<img    name ="userimage" src="{% static "myapp/static/users/2.jpg" %}"  style="width : 170px; height : 170px;"/> 
+<br>
+update image:
+<input  placeholder="your pic" type="file" name="image"/>
+<br>
+<input  hidden  type="text" name="oldusername"/><br>
+<input type="submit" name="update" value="Update"/>
+</form>
+<br>
+<p id="FormError"></p>
+<script>
+{% if registerMessage  %}
+document.getElementById("FormError").innerHTML = "{{registerMessage}}"; 
+{%endif%}
+
+{% if userimage  %}
+//document.getElementsByName("userimage")[0].src = "{% static "" %}{{userimage}}" 
+{%endif%}
+
+{% if username  %}
+document.getElementsByName("username")[0].value = "{{username}}"; 
+document.getElementsByName("oldusername")[0].value = "{{username}}"; 
+{%endif%}
+
+{% if email  %}
+document.getElementsByName("email")[0].value = "{{email}}"; 
+{%endif%}
+
+</script>
+
+
+
+</body>
+</html>
